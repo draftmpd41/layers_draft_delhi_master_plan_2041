@@ -37,6 +37,12 @@ An interactive tool to visualise layers extracted so far can be viewed [here](ht
 #### Layers yet to be extracted
 1. ROAD_RAILWAY_METRO_LINES_Roads_ROW_MPD_170321__query_applied
 
+### CRS conversion
+When we extract without specifying any CRS (Co-ordinate Reference System), the resulting shapefiles have v.large co-ordinates like this: (716882.20,3166456.28)  
+Turns out they're projected in a different CRS, but that info wasn't available.  
+By using this tool: http://projfinder.com/ we were able to find it out: **EPSG:32643** .  
+So, in the ogr2ogr lines we specify source and destnation CRS's - converting it to conventional lat-longs (which is EPSG:4326).
+
 # Geospatial PDFs or GeoPDFs
 Quite a few local development authorities have started using GIS for compiling the spatial information they collect for planning related surveys and activities. The tools such as ArcMap (ArcGIS Desktop) or QGIS, usually allow exporting these layers as PDF maps. These PDFs are most often geospatial PDFs that retain the spatial information and the vector geometries of the constitutent layers. One can view the coordinate information in these PDFs by opening them in a software such as Adobe Acrobat and using the 'Tools> Measure> Geospatial Location Tool' option. This is also one way of verifying if the PDF is a geospatial PDF. This ability of the file format -to retain spatial info- allows extraction of the constituent layers back from the PDFs for any further analysis. However, such an extraction process is still not ideal since the attribute information, such as labels/names of the features, are difficult to extract. And one also has to deal with projection/coordinate system related discrepancies that arise as a result of such extraction.
 
